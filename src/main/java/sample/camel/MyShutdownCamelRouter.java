@@ -16,25 +16,29 @@
  */
 package sample.camel;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * A bean that returns a message when you call the {@link #saySomething()} method.
+ * A simple Camel route that triggers from a timer and calls a bean and prints to system out.
  * <p/>
- * Uses <tt>@Component("myBean")</tt> to register this bean with the name <tt>myBean</tt>
- * that we use in the Camel route to lookup this bean.
+ * Use <tt>@Component</tt> to make Camel auto detect this route when starting.
  */
-@Component("myBean")
-public class MyBean {
+@Component
+public class MyShutdownCamelRouter extends RouteBuilder {
 
-    private int counter;
 
-    @Value("${greeting}")
-    private String say;
 
-    public String saySomething(String body) {
-        return String.format("%s I am invoked %d times", say, ++counter);
+    @Override
+    public void configure() throws Exception {
+        // start from a timer
+        from("timer://myTimer?period=10s&repeatCount=5")
+        .routeId("AutoShutdownRoute")
+        .log("*** About to Sleep for 10s ***")
+        .delay(60000).syncDelayed()
+        .log("*** Woke up, completed! ***")
+        ;
     }
 
 }

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
+
 <!--
 
     Licensed to the Apache Software Foundation (ASF) under one or more
@@ -27,7 +28,9 @@
         <version>3.5.0</version>
     </parent>
 
+<!--    <groupId>com.sreejesh</groupId>-->
     <artifactId>camel-example-spring-boot</artifactId>
+<!--    <version>0.0.1-SNAPSHOT</version>-->
     <name>Camel SB Examples :: Spring Boot</name>
     <description>An example showing how to work with Camel and Spring Boot</description>
 
@@ -37,6 +40,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.boot-version>${spring-boot-version}</spring.boot-version>
+<!--        <camel-version>3.5.0</camel-version>-->
     </properties>
 
     <dependencyManagement>
